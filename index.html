@@ -709,6 +709,46 @@
     }
 
 </style>
+
+  .reg-fees-grid {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+  justify-content: center;
+}
+
+.reg-fee-card {
+  background: linear-gradient(135deg, #f8f9ff, #eef1ff);
+  border: 2px solid #6c63ff;
+  border-radius: 12px;
+  padding: 1.2rem 2rem;
+  text-align: center;
+  min-width: 130px;
+}
+
+.reg-fee-card .reg-fee {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #6c63ff;
+}
+
+.reg-fee-card .reg-fee-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 0.3rem;
+  font-weight: 600;
+}
+
+.reg-fee-note {
+  text-align: center;
+  margin: 0.8rem 0 1.2rem;
+  font-size: 0.95rem;
+  color: #444;
+  background: #fffbea;
+  border-left: 4px solid #f5c518;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+}
 </head>
 <body>
 
@@ -1066,13 +1106,22 @@
   <h2 class="section-title reveal">Registration</h2>
   <div class="reg-grid reveal">
     <div class="reg-card featured">
-      <h3>Registration Fee</h3>
-      <div class="reg-fee">950 DT</div>
-      <div class="reg-fee-label">Tunisian Dinar — all 4 days included</div>
-      <div class="reg-detail"><strong>Format:</strong> In-person, Mahdia, Tunisia</div>
-      <div class="reg-detail"><strong>Duration:</strong> 4 days · 28 hours</div>
-      <div class="reg-detail"><strong>Group size:</strong> 12 to 25 participants</div>
-      <div class="reg-detail"><strong>Target:</strong> Graduate students, researchers, professionals</div>
+<h3>Registration Fee</h3>
+<div class="reg-fees-grid">
+  <div class="reg-fee-card">
+    <div class="reg-fee">300 €</div>
+    <div class="reg-fee-label">Students</div>
+  </div>
+  <div class="reg-fee-card">
+    <div class="reg-fee">500 €</div>
+    <div class="reg-fee-label">Others</div>
+  </div>
+</div>
+<div class="reg-fee-note">🏨 Accommodation at <strong>El Moradi Mahdia Hotel 5★</strong> included</div>
+<div class="reg-detail"><strong>Format:</strong> In-person, Mahdia, Tunisia</div>
+<div class="reg-detail"><strong>Duration:</strong> 4 days · 28 hours</div>
+<div class="reg-detail"><strong>Target:</strong> Graduate students, researchers, professionals</div>
+      
       <div style="margin-top:2rem;">
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAL8r-HN4rnjGNSsHudknxY6EuqyJgFy7VShy0Pb7X69YbNA/viewform" target="_blank" class="btn-primary" style="display:inline-flex;">Register Now →</a>
       </div>
