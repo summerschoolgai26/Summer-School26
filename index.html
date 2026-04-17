@@ -699,67 +699,75 @@
   </style>
 
   <style>
-     .trainer-figure-img {
+    .trainer-figure {
+      flex: 0 0 180px;
+      text-align: center;
+      margin-left: auto;
+    }
+    .trainer-figure-img {
+      width: 180px;
+      height: 180px;
       object-fit: cover;
       border-radius: 16px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.15);
       border: 4px solid #fff;
-     align-items: center;
-
     }
 
-</style>
-
-  .reg-fees-grid {
-  display: flex;
-  gap: 1.5rem;
-  margin: 1rem 0;
-  justify-content: center;
-}
-
-.reg-fee-card {
-  background: linear-gradient(135deg, #f8f9ff, #eef1ff);
-  border: 2px solid #6c63ff;
-  border-radius: 12px;
-  padding: 1.2rem 2rem;
-  text-align: center;
-  min-width: 130px;
-}
-
-.reg-fee-card .reg-fee {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #6c63ff;
-}
-
-.reg-fee-card .reg-fee-label {
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 0.3rem;
-  font-weight: 600;
-}
-
-.reg-fee-note {
-  text-align: center;
-  margin: 0.8rem 0 1.2rem;
-  font-size: 0.95rem;
-  color: #444;
-  background: #fffbea;
-  border-left: 4px solid #f5c518;
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-}
-
-  .h1-badge {
-  font-size: 0.35em;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.7;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-  
+    .reg-fees-grid {
+      display: flex;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+    .reg-fee-card {
+      background: linear-gradient(135deg, var(--teal-pale), rgba(10,124,126,0.12));
+      border: 2px solid var(--teal);
+      border-radius: 12px;
+      padding: 1.2rem 2rem;
+      text-align: center;
+      min-width: 130px;
+    }
+    .reg-fee-card .reg-fee {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .reg-fee-card .reg-fee-label {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+    .reg-fee-note {
+      text-align: center;
+      margin: 0.8rem 0 1.2rem;
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      background: var(--gold-pale);
+      border-left: 4px solid var(--gold);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+    }
+    .h1-badge {
+      font-size: 0.35em;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .h1-sub {
+      font-size: 0.55em;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      opacity: 0.8;
+      display: block;
+      margin-top: 0.3rem;
+    }
+  </style>
 </head>
 <body>
 
@@ -806,9 +814,8 @@
   </div>
 
 <h1>
-  <span class="h1-badge">Summer School 2025</span><br/>
-  AI &amp; <em>Generative AI</em><br/>
-  <span class="h1-sub">Advanced Technologies &amp; Medical Applications</span>
+  <span class="h1-badge">Summer School 2026</span>
+  GAI for Advanced Technologies<br/><em>Review on Medical Applications</em>
 </h1>
 
 <p class="hero-sub">Four days of intensive lectures, hands-on labs, and round tables exploring deep learning for medical imaging, clinical data analysis, and generative modeling.</p>
