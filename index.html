@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Summer School on AI & GAI for Advanced Technologies: Review on Medical Applications 2026, Mahdia Tunisia. 4 days of PyTorch, medical imaging, diffusion models, and hands-on labs."/>
+  <title>Summer School — AI & GAI for Advanced Technologies: Review on Medical Applications 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #FAFAF7;
+      --cream-mid: #F3F2EC;
+      --cream-dark: #EAE9E0;
+      --ink: #1A1A16;
+      --ink-mid: #3D3D35;
+      --ink-soft: #6B6B60;
+      --ink-faint: #9E9E92;
+      --teal: #0A7C7E;
+      --teal-light: #0FA3A6;
+      --teal-pale: rgba(10,124,126,0.08);
+      --teal-pale2: rgba(10,124,126,0.14);
+      --gold: #B8812A;
+      --gold-light: #D4A44C;
+      --gold-pale: rgba(184,129,42,0.1);
+      --border: rgba(26,26,22,0.1);
+      --border-strong: rgba(26,26,22,0.2);
+      --card-bg: #FFFFFF;
+      --shadow-sm: 0 1px 3px rgba(26,26,22,0.06), 0 4px 12px rgba(26,26,22,0.04);
+      --shadow-md: 0 4px 16px rgba(26,26,22,0.08), 0 2px 4px rgba(26,26,22,0.04);
+      --shadow-lg: 0 8px 32px rgba(26,26,22,0.1), 0 2px 8px rgba(26,26,22,0.06);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* BACKGROUND TEXTURE */
+    .bg-texture {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 5% 10%, rgba(10,124,126,0.04) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 95% 90%, rgba(184,129,42,0.04) 0%, transparent 55%);
+    }
+    .dot-pattern {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(26,26,22,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.4;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 3rem;
+      background: rgba(250,250,247,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem; font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .nav-logo-mark {
+      width: 28px; height: 28px; border-radius: 6px;
+      background: var(--teal);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 0.65rem; font-weight: 700;
+      font-family: 'DM Mono', monospace; letter-spacing: 0;
+      flex-shrink: 0;
+    }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+    .nav-cta {
+      background: var(--teal);
+      color: white;
+      padding: 0.55rem 1.5rem;
+      border-radius: 4px;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      transition: all 0.2s;
+      box-shadow: 0 2px 8px rgba(10,124,126,0.25);
+    }
+    .nav-cta:hover {
+      background: var(--teal-light);
+      box-shadow: 0 4px 16px rgba(10,124,126,0.35);
+      transform: translateY(-1px);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 10rem 3rem 7rem;
+      position: relative; z-index: 1;
+      max-width: 1100px;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--teal);
+      background: var(--teal-pale);
+      border: 1px solid rgba(10,124,126,0.2);
+      padding: 0.4rem 0.9rem;
+      border-radius: 3px;
+      margin-bottom: 2.2rem;
+      width: fit-content;
+      animation: fade-up 0.7s ease both;
+    }
+    .eyebrow-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--teal);
+      animation: blink 2.5s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 6.5vw, 6rem);
+      font-weight: 600;
+      line-height: 1.02;
+      margin-bottom: 1.8rem;
+      max-width: 860px;
+      animation: fade-up 0.7s 0.1s ease both;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+    .hero-sub {
+      font-size: 1.02rem; font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      max-width: 560px;
+      margin-bottom: 3rem;
+      animation: fade-up 0.7s 0.2s ease both;
+    }
+    .hero-meta {
+      display: flex; flex-wrap: wrap; gap: 0.8rem;
+      margin-bottom: 3.2rem;
+      animation: fade-up 0.7s 0.3s ease both;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 0.7rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.1rem;
+      border-radius: 8px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .hero-meta-item:hover { box-shadow: var(--shadow-md); transform: translateY(-1px); }
+    .meta-icon {
+      font-size: 1rem;
+      width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--teal-pale);
+      border-radius: 6px;
+    }
+    .meta-label { font-size: 0.62rem; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.1rem; font-weight: 500; }
+    .meta-value { font-size: 0.85rem; color: var(--ink); font-weight: 600; }
+    .hero-buttons {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      animation: fade-up 0.7s 0.4s ease both;
+    }
+
+    /* DECORATIVE LINE */
+    .hero-line {
+      position: absolute; right: 3rem; top: 50%; transform: translateY(-50%);
+      width: 1px; height: 40%;
+      background: linear-gradient(to bottom, transparent, var(--border-strong), transparent);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    }
+    .hero-line-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal); margin: auto;
+      box-shadow: 0 0 12px rgba(10,124,126,0.4);
+    }
+    .scroll-hint {
+      position: absolute; bottom: 3rem; left: 3rem;
+      display: flex; align-items: center; gap: 0.6rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem; color: var(--ink-faint);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      animation: fade-up 0.7s 0.9s ease both;
+    }
+    .scroll-line {
+      width: 36px; height: 1px; background: var(--ink-faint);
+      position: relative; overflow: hidden;
+    }
+    .scroll-line::after {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: var(--teal);
+      animation: scroll-anim 2.4s ease-in-out infinite;
+    }
+    @keyframes scroll-anim { 0%{left:-100%} 100%{left:100%} }
+
+    /* BUTTONS */
+    .btn-primary {
+      background: var(--teal);
+      color: white;
+      padding: 0.9rem 2.4rem;
+      border-radius: 4px;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      box-shadow: 0 3px 12px rgba(10,124,126,0.3);
+    }
+    .btn-primary:hover {
+      background: var(--teal-light);
+      box-shadow: 0 6px 20px rgba(10,124,126,0.4);
+      transform: translateY(-2px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      padding: 0.9rem 2.4rem;
+      border-radius: 4px;
+      font-size: 0.82rem; font-weight: 500;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-secondary:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      background: var(--teal-pale);
+      transform: translateY(-2px);
+    }
+
+    /* DIVIDER */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+      margin: 0 3rem;
+      position: relative; z-index: 1;
+    }
+
+    /* SECTIONS */
+    section { padding: 6rem 3rem; position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; font-weight: 400;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.7rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-label::before { content: '—'; opacity: 0.5; }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.1rem, 3.8vw, 3.2rem);
+      font-weight: 600; line-height: 1.1;
+      margin-bottom: 1.1rem;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .section-desc {
+      font-size: 0.95rem; color: var(--ink-mid);
+      font-weight: 300; line-height: 1.85;
+      max-width: 580px; margin-bottom: 3.5rem;
+    }
+
+    /* FULL-WIDTH WRAPPERS */
+    .full-width { max-width: 100%; }
+    .section-wrapper { position: relative; z-index: 1; }
+    .section-wrapper.alt { background: var(--cream-mid); }
+
+    /* ABOUT */
+    #about { }
+    .about-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 6rem; align-items: start;
+    }
+    .about-text p {
+      font-size: 0.94rem; color: var(--ink-mid);
+      line-height: 1.9; margin-bottom: 1.1rem; font-weight: 300;
+    }
+    .about-text strong { color: var(--ink); font-weight: 600; }
+    .about-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .stat-card {
+      background: var(--card-bg);
+      padding: 2.2rem 1.8rem;
+      transition: background 0.2s;
+    }
+    .stat-card:hover { background: var(--cream-mid); }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem; font-weight: 700;
+      color: var(--teal);
+      line-height: 1; margin-bottom: 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    .stat-label { font-size: 0.78rem; color: var(--ink-soft); line-height: 1.5; font-weight: 400; }
+
+    /* PROGRAM */
+    #program { }
+    .resource-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-bottom: 3rem; }
+    .resource-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--ink-mid);
+      padding: 0.6rem 1.2rem;
+      border-radius: 4px;
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.03em;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+    }
+    .resource-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .days-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+    .day-card {
+      background: var(--card-bg);
+      padding: 1.8rem 1.5rem;
+      transition: background 0.2s;
+      position: relative;
+      border-top: 3px solid transparent;
+    }
+    .day-card:hover {
+      background: var(--cream-mid);
+      border-top-color: var(--teal);
+    }
+    .day-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .day-badge::before { content: ''; width: 10px; height: 2px; background: var(--gold); border-radius: 1px; }
+    .day-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 600;
+      line-height: 1.3; margin-bottom: 1.2rem;
+      color: var(--ink);
+    }
+    .day-topics { list-style: none; }
+    .day-topics li {
+      font-size: 0.78rem; color: var(--ink-soft);
+      padding: 0.3rem 0; line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .day-topics li:last-child { border-bottom: none; }
+    .day-topics li::before { content: '›'; color: var(--teal); flex-shrink: 0; margin-top: 0.05rem; }
+
+    /* MODULES TABLE */
+    .modules-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .modules-wrap table { width: 100%; border-collapse: collapse; }
+    .modules-wrap thead th {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ink-soft);
+      padding: 1rem 1.5rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: var(--cream-mid);
+    }
+    .modules-wrap tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+    .modules-wrap tbody tr:last-child { border-bottom: none; }
+    .modules-wrap tbody tr:hover { background: var(--teal-pale); }
+    .modules-wrap td { padding: 0.9rem 1.5rem; font-size: 0.82rem; vertical-align: middle; }
+    .module-name { color: var(--ink); font-weight: 600; }
+    .module-arch { color: var(--ink-soft); font-family: 'DM Mono', monospace; font-size: 0.74rem; }
+    .module-cases { color: var(--ink-faint); }
+
+    /* TECHNOLOGIES */
+    .tech-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 3.5rem; }
+    .tech-pill {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      color: var(--ink-soft);
+      padding: 0.42rem 0.9rem;
+      border-radius: 3px;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      transition: all 0.2s;
+      cursor: default;
+      box-shadow: var(--shadow-sm);
+    }
+    .tech-pill:hover { border-color: var(--teal); color: var(--teal); background: var(--teal-pale); }
+    .tech-pill.primary {
+      border-color: rgba(10,124,126,0.25);
+      color: var(--teal);
+      background: var(--teal-pale);
+    }
+    .tech-pill.primary:hover { background: var(--teal-pale2); }
+
+    .prereq-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px; background: var(--border);
+      border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .prereq-card {
+      background: var(--card-bg);
+      padding: 1.6rem;
+      transition: background 0.2s;
+    }
+    .prereq-card:hover { background: var(--cream-mid); }
+    .prereq-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.6rem;
+    }
+    .prereq-desc { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.6; }
+
+    /* ORGANIZERS */
+    .trainer-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(184,129,42,0.2);
+      border-radius: 12px; padding: 2.2rem 2.5rem;
+      margin-bottom: 3rem;
+      display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
+      position: relative; overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .trainer-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light), transparent);
+    }
+    .trainer-photo {
+      width: 88px; height: 88px; border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--gold-light);
+      box-shadow: 0 0 0 4px var(--gold-pale), var(--shadow-sm);
+      background: var(--cream-dark);
+      flex-shrink: 0;
+    }
+    .trainer-badge {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.35rem;
+    }
+    .trainer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem; font-weight: 600; margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+    .trainer-bio { font-size: 0.84rem; color: var(--ink-soft); line-height: 1.75; }
+
+    .role-section-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 1rem; margin-top: 2.5rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .role-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .people-grid { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-bottom: 0.5rem; }
+    .person-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.2rem;
+      display: flex; align-items: center; gap: 1rem;
+      transition: all 0.2s; min-width: 220px;
+      box-shadow: var(--shadow-sm);
+    }
+    .person-card:hover {
+      border-color: rgba(10,124,126,0.3);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .person-avatar {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--teal-pale);
+      border: 1px solid rgba(10,124,126,0.2);
+      color: var(--teal); font-weight: 600; font-size: 0.78rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-family: 'DM Mono', monospace;
+    }
+    .person-name { font-size: 0.87rem; font-weight: 600; margin-bottom: 0.15rem; color: var(--ink); }
+    .person-role { font-size: 0.71rem; color: var(--ink-faint); }
+    .person-affil { font-family: 'DM Mono', monospace; font-size: 0.67rem; color: var(--teal); margin-top: 0.2rem; }
+
+    /* REGISTRATION */
+    .reg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: start; }
+    .reg-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+      box-shadow: var(--shadow-md);
+    }
+    .reg-card.featured {
+      border-color: rgba(10,124,126,0.25);
+      box-shadow: var(--shadow-lg);
+    }
+    .reg-card.featured::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--teal-light));
+    }
+    .reg-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600; margin-bottom: 1.5rem; color: var(--ink);
+    }
+    .reg-fee {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem; font-weight: 700;
+      color: var(--teal); line-height: 1; margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+    }
+    .reg-fee-label { font-size: 0.77rem; color: var(--ink-faint); margin-bottom: 2rem; letter-spacing: 0.04em; }
+    .reg-detail {
+      font-size: 0.84rem; color: var(--ink-soft);
+      margin-bottom: 0.65rem; line-height: 1.6;
+      display: flex; align-items: flex-start; gap: 0.6rem;
+    }
+    .reg-detail::before { content: '—'; color: var(--teal); flex-shrink: 0; opacity: 0.6; }
+    .reg-detail strong { color: var(--ink); font-weight: 600; }
+    .qr-section {
+      margin-top: 2rem; padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; gap: 1.5rem;
+    }
+    .qr-section img {
+      width: 90px; height: 90px;
+      border-radius: 8px;
+      padding: 4px; background: white;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+    .qr-label { font-size: 0.77rem; color: var(--ink-soft); line-height: 1.6; }
+    .qr-label strong { color: var(--ink); display: block; margin-bottom: 0.2rem; }
+
+    .bank-block {
+      background: var(--cream-mid);
+      border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .bank-block h4 {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--teal); margin-bottom: 1rem;
+    }
+    .bank-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.8rem; padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border); gap: 1rem;
+    }
+    .bank-row:last-child { border-bottom: none; }
+    .bank-key { color: var(--ink-faint); flex-shrink: 0; }
+    .bank-val {
+      color: var(--ink-mid);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.74rem; text-align: right;
+    }
+
+    /* CONTACT */
+    #contact { text-align: center; }
+    .contact-inner { max-width: 520px; margin: 0 auto; }
+    .contact-email {
+      display: inline-flex; align-items: center; gap: 0.8rem;
+      background: var(--card-bg);
+      border: 1px solid rgba(10,124,126,0.25);
+      color: var(--teal);
+      padding: 1rem 2.5rem; border-radius: 6px;
+      font-size: 0.95rem; font-weight: 500;
+      text-decoration: none; margin-top: 2rem;
+      transition: all 0.2s;
+      box-shadow: var(--shadow-sm);
+    }
+    .contact-email:hover {
+      background: var(--teal-pale2);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .contact-social {
+      display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;
+    }
+    .social-link {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: var(--ink-faint); font-size: 0.78rem; text-decoration: none;
+      padding: 0.5rem 1rem; border: 1px solid var(--border); border-radius: 3px;
+      transition: all 0.2s; background: var(--card-bg);
+      box-shadow: var(--shadow-sm);
+    }
+    .social-link:hover { color: var(--teal); border-color: rgba(10,124,126,0.3); }
+
+    /* FOOTER */
+    footer {
+      padding: 2.5rem 3rem;
+      background: var(--ink);
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+      font-size: 0.78rem; color: rgba(255,255,255,0.35);
+      position: relative; z-index: 1;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem; font-weight: 600; color: rgba(255,255,255,0.85);
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.75rem; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.85); }
+    .footer-right { font-family: 'DM Mono', monospace; font-size: 0.67rem; }
+
+    /* ANIMATIONS */
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(22px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* MOBILE NAV */
+    .nav-hamburger {
+      display: none; flex-direction: column; gap: 4px;
+      cursor: pointer; padding: 4px;
+    }
+    .nav-hamburger span { width: 22px; height: 2px; background: var(--ink-soft); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu {
+      display: none; position: fixed;
+      top: 60px; left: 0; right: 0;
+      background: rgba(250,250,247,0.98);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      padding: 1.5rem 2rem; z-index: 99;
+      box-shadow: var(--shadow-md);
+    }
+    .mobile-menu.open { display: flex; flex-direction: column; gap: 1.2rem; }
+    .mobile-menu a {
+      color: var(--ink-mid); text-decoration: none;
+      font-size: 0.9rem; font-weight: 500;
+      padding: 0.5rem 0; border-bottom: 1px solid var(--border);
+    }
+    .mobile-menu a:last-child { border-bottom: none; color: var(--teal); font-weight: 600; }
+
+    /* PHOTO GALLERY */
+    .photo-gallery-header {
+      text-align: center;
+      padding: 3.5rem 3rem 1.5rem;
+    }
+    .gallery-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .gallery-stars {
+      color: var(--gold);
+      font-size: 0.85em;
+      letter-spacing: 0.05em;
+    }
+    .gallery-desc {
+      font-size: 0.92rem;
+      color: var(--ink-soft);
+      font-weight: 300;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+    .photo-gallery {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 240px 240px;
+      gap: 3px;
+      padding: 0 0 0 0;
+      background: var(--border);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--cream-dark);
+    }
+    .gallery-item--wide {
+      grid-row: span 2;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      filter: brightness(0.95);
+    }
+    .gallery-item:hover img {
+      transform: scale(1.04);
+      filter: brightness(1.02);
+    }
+    .gallery-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(10,10,8,0.82) 0%, transparent 100%);
+      padding: 1.5rem 1.2rem 1rem;
+      display: flex;
+      align-items: flex-end;
+      gap: 0.7rem;
+      transform: translateY(4px);
+      opacity: 0.92;
+      transition: all 0.3s;
+    }
+    .gallery-item:hover .gallery-caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .gallery-caption-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; }
+    .gallery-caption-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem; font-weight: 600;
+      color: white; line-height: 1.2;
+      margin-bottom: 0.15rem;
+    }
+    .gallery-caption-sub {
+      font-size: 0.68rem; color: rgba(255,255,255,0.65);
+      letter-spacing: 0.02em; line-height: 1.4;
+    }
+    .gallery-stars-badge {
+      margin-left: auto;
+      color: var(--gold-light);
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+    }
+
+    @media (max-width: 1100px) {
+      .days-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 4.5rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .about-grid, .reg-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .hero { padding: 9rem 1.5rem 5rem; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; }
+      .days-grid { grid-template-columns: 1fr; }
+      .trainer-card { flex-direction: column; text-align: center; }
+      .scroll-hint { display: none; }
+      .hero-line { display: none; }
+      .photo-gallery {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 200px 200px 200px;
+      }
+      .gallery-item--wide {
+        grid-column: span 2;
+        grid-row: span 1;
+      }
+      .photo-gallery-header { padding: 2.5rem 1.5rem 1.2rem; }
+    }
+  </style>
+
+  <style>
+    .trainer-figure {
+      flex: 0 0 180px;
+      text-align: center;
+      margin-left: auto;
+    }
+   .trainer-figure-img {
+  width: 1000px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  border: 4px solid #fff;
+}
+
+    .reg-fees-grid {
+      display: flex;
+      gap: 1.5rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+    .reg-fee-card {
+      background: linear-gradient(135deg, var(--teal-pale), rgba(10,124,126,0.12));
+      border: 2px solid var(--teal);
+      border-radius: 12px;
+      padding: 1.2rem 2rem;
+      text-align: center;
+      min-width: 130px;
+    }
+    .reg-fee-card .reg-fee {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1;
+    }
+    .reg-fee-card .reg-fee-label {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      margin-top: 0.3rem;
+      font-weight: 600;
+    }
+    .reg-fee-note {
+      text-align: center;
+      margin: 0.8rem 0 1.2rem;
+      font-size: 0.88rem;
+      color: var(--ink-mid);
+      background: var(--gold-pale);
+      border-left: 4px solid var(--gold);
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+    }
+    .h1-badge {
+      font-size: 0.35em;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .h1-sub {
+      font-size: 0.55em;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      opacity: 0.8;
+      display: block;
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg-texture"></div>
+<div class="dot-pattern"></div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#program" onclick="closeMobile()">Program</a>
+  <a href="#technologies" onclick="closeMobile()">Technologies</a>
+  <a href="#organizers" onclick="closeMobile()">Organizers</a>
+  <a href="#registration" onclick="closeMobile()">Registration</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAL8r-HN4rnjGNSsHudknxY6EuqyJgFy7VShy0Pb7X69YbNA/viewform" target="_blank">→ Register Now</a>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">
+    <div class="nav-logo-mark">AI</div>
+    SS·AI·Med 2026
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#program">Program</a></li>
+    <li><a href="#technologies">Technologies</a></li>
+    <li><a href="#organizers">Organizers</a></li>
+    <li><a href="#registration">Registration</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAL8r-HN4rnjGNSsHudknxY6EuqyJgFy7VShy0Pb7X69YbNA/viewform" target="_blank" class="nav-cta">Register</a>
+  <div class="nav-hamburger" onclick="toggleMobile()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-eyebrow">
+    <div class="eyebrow-dot"></div>
+    Summer School 2026 · Hôtel El Mouradi Mahdia ★★★★★
+  </div>
+
+<h1>
+  <span class="h1-badge">Summer School 2026</span>
+  GAI for Advanced Technologies<br/><em>Review on Medical Applications</em>
+</h1>
+
+<p class="hero-sub">Four days of intensive lectures, hands-on labs, and round tables exploring deep learning for medical imaging, clinical data analysis, and generative modeling.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="meta-icon">📅</div>
+      <div><div class="meta-label">Dates</div><div class="meta-value">July 1 – 4, 2026</div></div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="meta-icon">🏨</div>
+      <div><div class="meta-label">Venue</div><div class="meta-value">El Mouradi Mahdia ⭐⭐⭐⭐⭐</div></div>
+    </div>
+    <div class="hero-meta-item">
+      <div class="meta-icon">🎓</div>
+      <div><div class="meta-label">Level</div><div class="meta-value">Intermediate / Advanced</div></div>
+    </div>
+    
+  </div>
+  <div class="hero-buttons">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAL8r-HN4rnjGNSsHudknxY6EuqyJgFy7VShy0Pb7X69YbNA/viewform" target="_blank" class="btn-primary">Register Now →</a>
+    <a href="preliminary_program.pdf" class="btn-secondary">View Program</a>
+  </div>
+  <div class="hero-line"><div class="hero-line-dot"></div></div>
+  <div class="scroll-hint"><div class="scroll-line"></div>Scroll to explore</div>
+</section>
+
+
+<!-- PHOTO CAROUSEL -->
+<div class="section-wrapper" style="position:relative; z-index:1;">
+  <div class="photo-gallery-header">
+    <div class="section-label" style="justify-content:center; margin-bottom:0.4rem;">
+      <span>Lieu &amp; Cadre</span>
+    </div>
+    <h2 class="gallery-title">Mahdia &amp; Hôtel El Mouradi <span class="gallery-stars">★★★★★</span></h2>
+    <p class="gallery-desc">Un cadre exceptionnel en bord de mer méditerranée pour une école d'été inoubliable.</p>
+  </div>
+
+  <div class="carousel-wrapper">
+    <button class="carousel-btn carousel-btn--prev" onclick="carouselPrev()" aria-label="Précédent">&#8592;</button>
+    <button class="carousel-btn carousel-btn--next" onclick="carouselNext()" aria-label="Suivant">&#8594;</button>
+
+    <div class="carousel-track-container" id="carouselContainer">
+      <div class="carousel-track" id="carouselTrack">
+
+        <!-- Slide 1 : Hôtel -->
+        <div class="carousel-slide">
+          <img src="https://cf.bstatic.com/xdata/images/hotel/max1024x768/44278005.jpg?k=4d59a0c05c3bad6d00b22b5ebcfbde35127e2d43d68c9ce99b6ab5b26df01ede&o=&hp=1"
+               alt="Hôtel El Mouradi Mahdia"
+               onerror="this.src='https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=85'" />
+          <div class="carousel-caption">
+            <span class="carousel-caption-icon">🏨</span>
+            <div>
+              <div class="carousel-caption-title">Hôtel El Mouradi Mahdia</div>
+              <div class="carousel-caption-sub">5 étoiles · Piscine · Plage privée · Mahdia, Tunisie</div>
+            </div>
+            <div class="carousel-stars">★★★★★</div>
+          </div>
+        </div>
+
+        <!-- Slide 2 : Hotel piscine -->
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&q=85"
+               alt="Piscine hôtel Mahdia" />
+          <div class="carousel-caption">
+            <span class="carousel-caption-icon">🏊</span>
+            <div>
+              <div class="carousel-caption-title">Piscine &amp; Détente</div>
+              <div class="carousel-caption-sub">Hôtel El Mouradi · Vue sur mer · Mahdia</div>
+            </div>
+            <div class="carousel-stars">★★★★★</div>
+          </div>
+        </div>
+
+        <!-- Slide 3 : Cap Mahdia -->
+        <div class="carousel-slide">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Mahdia_cap.jpg/1280px-Mahdia_cap.jpg"
+               alt="Cap de Mahdia"
+               onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=85'" />
+          <div class="carousel-caption">
+            <span class="carousel-caption-icon">🏛️</span>
+            <div>
+              <div class="carousel-caption-title">Cap de Mahdia</div>
+              <div class="carousel-caption-sub">Médina historique, phare &amp; patrimoine de Tunisie</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 4 : Plage -->
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1200&q=85"
+               alt="Plage de Mahdia" />
+          <div class="carousel-caption">
+            <span class="carousel-caption-icon">🏖️</span>
+            <div>
+              <div class="carousel-caption-title">Plage de Mahdia</div>
+              <div class="carousel-caption-sub">Mer Méditerranée · Sable fin &amp; eaux cristallines</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 5 : Côte -->
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1499678329028-101435549a4e?w=1200&q=85"
+               alt="Côte méditerranéenne Mahdia" />
+          <div class="carousel-caption">
+            <span class="carousel-caption-icon">🌊</span>
+            <div>
+              <div class="carousel-caption-title">Côte Méditerranéenne</div>
+              <div class="carousel-caption-sub">Mahdia · Tunisie · Juillet 2026</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 6 : Coucher de soleil -->
+        <div class="carousel-slide">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=85"
+               alt="Coucher de soleil mer Mahdia" />
+          <div class="carousel-caption">
+            <span class="carousel-caption-icon">🌅</span>
+            <div>
+              <div class="carousel-caption-title">Coucher de Soleil</div>
+              <div class="carousel-caption-sub">Un cadre magique pour votre séjour d'été</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end track -->
+    </div><!-- end container -->
+
+    <!-- Dots -->
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</div>
+
+<style>
+  /* CAROUSEL */
+  .carousel-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: var(--ink);
+  }
+  .carousel-track-container {
+    width: 100%;
+    overflow: hidden;
+  }
+  .carousel-track {
+    display: flex;
+    transition: transform 0.65s cubic-bezier(0.77, 0, 0.175, 1);
+    will-change: transform;
+  }
+  .carousel-slide {
+    min-width: 100%;
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.88);
+    transition: filter 0.4s;
+  }
+  .carousel-slide.active img { filter: brightness(0.92); }
+
+  /* Caption */
+  .carousel-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(8,8,6,0.85) 0%, rgba(8,8,6,0.3) 60%, transparent 100%);
+    padding: 3rem 3.5rem 2rem;
+    display: flex; align-items: flex-end; gap: 1rem;
+  }
+  .carousel-caption-icon { font-size: 1.8rem; flex-shrink: 0; }
+  .carousel-caption-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    font-weight: 600; color: white; line-height: 1.15;
+    margin-bottom: 0.3rem;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .carousel-caption-sub {
+    font-size: 0.82rem; color: rgba(255,255,255,0.7);
+    letter-spacing: 0.03em; line-height: 1.5;
+  }
+  .carousel-stars {
+    margin-left: auto; flex-shrink: 0;
+    color: var(--gold-light);
+    font-size: 1.3rem; letter-spacing: 0.08em;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  /* Nav buttons */
+  .carousel-btn {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    z-index: 10;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white; font-size: 1.2rem;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .carousel-btn:hover {
+    background: rgba(10,124,126,0.7);
+    border-color: var(--teal);
+    transform: translateY(-50%) scale(1.08);
+  }
+  .carousel-btn--prev { left: 1.5rem; }
+  .carousel-btn--next { right: 1.5rem; }
+
+  /* Dots */
+  .carousel-dots {
+    position: absolute; bottom: 1.2rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 0.5rem; z-index: 10;
+  }
+  .carousel-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    border: none; cursor: pointer;
+    transition: all 0.3s; padding: 0;
+  }
+  .carousel-dot.active {
+    background: white;
+    width: 24px; border-radius: 4px;
+  }
+
+  /* Progress bar */
+  .carousel-progress {
+    position: absolute; bottom: 0; left: 0;
+    height: 3px; background: var(--teal);
+    transition: width 0.1s linear;
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .carousel-slide { height: 320px; }
+    .carousel-caption { padding: 2rem 1.5rem 1.2rem; }
+    .carousel-btn { width: 38px; height: 38px; font-size: 1rem; }
+    .carousel-btn--prev { left: 0.8rem; }
+    .carousel-btn--next { right: 0.8rem; }
+  }
+</style>
+
+<script>
+  (function() {
+    const track = document.getElementById('carouselTrack');
+    const slides = track ? track.querySelectorAll('.carousel-slide') : [];
+    const dotsContainer = document.getElementById('carouselDots');
+    const totalSlides = slides.length;
+    let current = 0;
+    let autoTimer = null;
+    let progressTimer = null;
+    let progressStart = null;
+    const INTERVAL = 4000;
+
+    if (!track || totalSlides === 0) return;
+
+    // Create progress bar
+    const progress = document.createElement('div');
+    progress.className = 'carousel-progress';
+    track.parentElement.parentElement.appendChild(progress);
+
+    // Create dots
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Slide ' + (i+1));
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    function updateDots() {
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    function goTo(index) {
+      slides[current].classList.remove('active');
+      current = (index + totalSlides) % totalSlides;
+      slides[current].classList.add('active');
+      track.style.transform = `translateX(-${current * 100}%)`;
+      updateDots();
+      resetProgress();
+    }
+
+    function resetProgress() {
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+      clearTimeout(progressTimer);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          progress.style.transition = `width ${INTERVAL}ms linear`;
+          progress.style.width = '100%';
+        });
+      });
+    }
+
+    function startAuto() {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1), INTERVAL);
+    }
+
+    // Init
+    slides[0].classList.add('active');
+    goTo(0);
+    startAuto();
+
+    // Pause on hover
+    const wrapper = track.closest('.carousel-wrapper');
+    wrapper.addEventListener('mouseenter', () => {
+      clearInterval(autoTimer);
+      progress.style.animationPlayState = 'paused';
+    });
+    wrapper.addEventListener('mouseleave', () => {
+      startAuto();
+      resetProgress();
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    wrapper.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+    wrapper.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+    }, {passive:true});
+
+    // Expose for buttons
+    window.carouselNext = () => { goTo(current + 1); clearInterval(autoTimer); startAuto(); };
+    window.carouselPrev = () => { goTo(current - 1); clearInterval(autoTimer); startAuto(); };
+  })();
+</script>
+
+<div class="divider"></div>
+
+
+<!-- ABOUT -->
+<div class="section-wrapper">
+<section id="about">
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <div class="section-label">About the event</div>
+      <h2 class="section-title">Where Deep Learning<br/>meets Medicine</h2>
+      <p>The Summer School on Artificial Intelligence and Generative AI in Medical Applications will explore key areas of AI and deep learning, with a particular focus on healthcare — including medical imaging, clinical data analysis, and generative modeling.</p>
+      <p>Major challenges and emerging trends will be addressed through lectures, round tables, and hands-on laboratory sessions over four intensive days, providing participants with an interactive and collaborative learning environment.</p>
+      <p>Organized by the <strong>ATSI Association</strong>, in collaboration with the <strong>IEEE International Conference ATSIP</strong> and the Tunisian Ministry of Higher Education and Scientific Research, through Collaborative Research Program <strong>PRC2024-D3P03</strong>.</p>
+    </div>
+<div class="about-stats">
+  <div class="stat-card"><div class="stat-num">4</div><div class="stat-label">Intensive days<br/>28 hours total</div></div>
+  <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Deep learning architectures covered</div></div>
+  <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">PyTorch-based hands-on labs</div></div>
+  <div class="stat-card"><div class="stat-num">🎓</div><div class="stat-label">Certificate<br/>delivered to all participants</div></div>
+</div>
+</section>
+</div>
+
+
+<div class="divider"></div>
+
+
+<!-- PROGRAM -->
+<div class="section-wrapper alt">
+<section id="program">
+  <div class="section-label reveal">4-day curriculum</div>
+  <h2 class="section-title reveal">Program Overview</h2>
+  <p class="section-desc reveal">A progressive journey from PyTorch fundamentals to state-of-the-art generative models and Vision Transformers, with real medical use cases throughout.</p>
+
+ <div class="resource-links reveal">
+  <a class="resource-btn" href="call_for_participation.pdf" target="_blank">
+    📄 Call for Participation (PDF)
+  </a>
+  <a class="resource-btn" href="preliminary_program.pdf" target="_blank">
+    📅 Preliminary Program (PDF)
+  </a>
+</div>
+
+  <div class="days-grid reveal">
+    <div class="day-card">
+      <div class="day-badge">Day 1 · July 1</div>
+      <div class="day-title">PyTorch Foundations, MLP &amp; CNN</div>
+      <ul class="day-topics">
+        <li>PyTorch tensors, autograd &amp; nn.Module</li>
+        <li>DataLoader, training loop, state_dict</li>
+        <li>MLP for 1D signal classification (ECG)</li>
+        <li>CNN architectures: ResNet, EfficientNet</li>
+        <li>Transfer Learning &amp; fine-tuning</li>
+        <li>torchvision transforms &amp; augmentation</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-badge">Day 2 · July 2</div>
+      <div class="day-title">Transfer Learning, RNN/LSTM &amp; Explainability</div>
+      <ul class="day-topics">
+        <li>Fine-tuning ResNet50 on Chest X-Ray</li>
+        <li>RNN, LSTM, GRU for time series</li>
+        <li>BiLSTM for ECG denoising</li>
+        <li>Explainable AI: Grad-CAM, SHAP, LIME</li>
+        <li>Captum library &amp; Attention Rollout</li>
+        <li>XAI for medical regulatory compliance</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-badge">Day 3 · July 3</div>
+      <div class="day-title">Autoencoders, VAE &amp; Diffusion Models</div>
+      <ul class="day-topics">
+        <li>ConvAE for MRI/CT denoising</li>
+        <li>Variational Autoencoder (reparametrization)</li>
+        <li>DDPM: forward/reverse diffusion process</li>
+        <li>U-Net conditioned on timestep</li>
+        <li>DDIM accelerated sampling</li>
+        <li>Hugging Face diffusers library</li>
+      </ul>
+    </div>
+    <div class="day-card">
+      <div class="day-badge">Day 4 · July 4</div>
+      <div class="day-title">GAN, Vision Transformers &amp; Final Project</div>
+      <ul class="day-topics">
+        <li>DCGAN, cGAN, Pix2Pix in PyTorch</li>
+        <li>SRGAN for medical super-resolution</li>
+        <li>Vision Transformers: ViT, Swin, DeiT</li>
+        <li>SegFormer semantic segmentation</li>
+        <li>TorchScript &amp; ONNX deployment</li>
+        <li>Final project live demo &amp; evaluation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="modules-wrap reveal">
+    <table>
+      <thead>
+        <tr>
+          <th>Module</th>
+          <th>Architectures</th>
+          <th>Medical Use Cases</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="module-name">PyTorch Initiation</td><td class="module-arch">Tensors, Autograd, nn.Module, DataLoader</td><td class="module-cases">First models, complete pipeline</td></tr>
+        <tr><td class="module-name">MLP Fundamentals</td><td class="module-arch">Perceptron, Dense layers, Backpropagation</td><td class="module-cases">1D signal classification, Regression</td></tr>
+        <tr><td class="module-name">CNN &amp; Vision</td><td class="module-arch">ConvNet, VGG, ResNet, EfficientNet</td><td class="module-cases">Classification, Object detection</td></tr>
+        <tr><td class="module-name">Transfer Learning</td><td class="module-arch">Fine-tuning, Feature extraction, timm</td><td class="module-cases">Medical image classification</td></tr>
+        <tr><td class="module-name">RNN Sequences</td><td class="module-arch">RNN, LSTM, GRU, Bidirectional</td><td class="module-cases">ECG/audio signals, Time series</td></tr>
+        <tr><td class="module-name">Autoencoders &amp; VAE</td><td class="module-arch">AE dense, ConvAE, VAE, Bottleneck</td><td class="module-cases">Denoising, Compression, Anomaly detection</td></tr>
+        <tr><td class="module-name">GAN</td><td class="module-arch">GAN, DCGAN, cGAN, Pix2Pix</td><td class="module-cases">Super-resolution, Data synthesis</td></tr>
+        <tr><td class="module-name">Vision Transformer</td><td class="module-arch">ViT, Swin, DeiT, SegFormer</td><td class="module-cases">Fine-grained classification, Segmentation</td></tr>
+        <tr><td class="module-name">Explainable AI (XAI)</td><td class="module-arch">Grad-CAM, SHAP, LIME, Attention Maps</td><td class="module-cases">Interpretability, Regulatory audit</td></tr>
+        <tr><td class="module-name">Diffusion Models</td><td class="module-arch">DDPM, Score-Based, Conditional Diffusion</td><td class="module-cases">Image generation, Inpainting, Denoising</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</div>
+
+
+<div class="divider"></div>
+
+
+<!-- TECHNOLOGIES -->
+<div class="section-wrapper">
+<section id="technologies">
+  <div class="section-label reveal">Technical stack</div>
+  <h2 class="section-title reveal">Technologies &amp; Tools</h2>
+  <p class="section-desc reveal">All sessions are fully based on Python and PyTorch, with the latest ecosystem tools for deep learning research and deployment.</p>
+  <div class="tech-grid reveal">
+    <span class="tech-pill primary">Python 3.10+</span>
+    <span class="tech-pill primary">PyTorch 2.x</span>
+    <span class="tech-pill primary">torchvision</span>
+    <span class="tech-pill primary">torchaudio</span>
+    <span class="tech-pill primary">Hugging Face</span>
+    <span class="tech-pill primary">timm</span>
+    <span class="tech-pill">OpenCV</span>
+    <span class="tech-pill">Albumentations</span>
+    <span class="tech-pill">torchmetrics</span>
+    <span class="tech-pill">einops</span>
+    <span class="tech-pill">Captum (XAI)</span>
+    <span class="tech-pill">pytorch-grad-cam</span>
+    <span class="tech-pill">SHAP</span>
+    <span class="tech-pill">diffusers</span>
+    <span class="tech-pill">pytorch-fid</span>
+    <span class="tech-pill">Weights &amp; Biases</span>
+    <span class="tech-pill">TensorBoard</span>
+    <span class="tech-pill">TorchScript</span>
+    <span class="tech-pill">ONNX</span>
+    <span class="tech-pill">Jupyter / VS Code</span>
+    <span class="tech-pill">Google Colab Pro</span>
+    <span class="tech-pill">NVIDIA CUDA 12.x</span>
+  </div>
+
+  <div class="section-label reveal">Prerequisites</div>
+  <div class="prereq-grid reveal" style="margin-top:1rem;">
+    <div class="prereq-card">
+      <div class="prereq-title">Python</div>
+      <div class="prereq-desc">Solid skills in NumPy, Pandas, Matplotlib</div>
+    </div>
+    <div class="prereq-card">
+      <div class="prereq-title">Machine Learning</div>
+      <div class="prereq-desc">Basics: regression, classification, clustering</div>
+    </div>
+    <div class="prereq-card">
+      <div class="prereq-title">Mathematics</div>
+      <div class="prereq-desc">Linear algebra, differential calculus, probabilities</div>
+    </div>
+    <div class="prereq-card">
+      <div class="prereq-title">PyTorch</div>
+      <div class="prereq-desc">No prior knowledge required — full initiation on Day 1</div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<div class="divider"></div>
+
+
+<!-- ORGANIZERS -->
+<div class="section-wrapper alt">
+<section id="organizers">
+  <div class="section-label reveal">People</div>
+  <h2 class="section-title reveal">Trainer &amp; Organizers</h2>
+  <div class="trainer-card reveal">
+    <img src="trainer_bassem.jpg" alt="Prof. Bassem Ben Hamed" class="trainer-photo">
+    <div class="trainer-info">
+      <div class="trainer-badge">Lead Trainer</div>
+      <div class="trainer-name">Bassem Ben Hamed</div>
+      <div class="trainer-bio">
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li>🎓 Professor in Applied Mathematics at <strong>ENET'Com</strong></li>
+          <li>📊 Co-founder &amp; Data Scientist at <strong>DataCamp Training &amp; Consulting</strong></li>
+          <li>💡 Co-founder &amp; Technical Lead at <strong>Digital Innovation Partner</strong></li>
+          <li>🤖 Senior Instructor — <strong>Huawei Artificial Intelligence</strong></li>
+          <li>📚 Instructor <strong>CDOSS</strong> — Machine Learning, Deep Learning &amp; MLOps</li>
+        </ul>
+      </div>
+    </div>
+    <div class="trainer-figure">
+      <img src="trainer_logo.png" alt="Prof. Bassem Ben Hamed" class="trainer-figure-img">
+      </div>
+  </div>
+
+  <div class="role-section-title reveal">Honorary Chair</div>
+  <div class="people-grid reveal">
+    <div class="person-card">
+      <div class="person-avatar">AB</div>
+      <div><div class="person-name">Ahmed Ben Hamida</div><div class="person-role">Honorary Chair</div><div class="person-affil">KK University, KSA</div></div>
+    </div>
+  </div>
+
+  <div class="role-section-title reveal">General Chairs</div>
+  <div class="people-grid reveal">
+    <div class="person-card">
+      <div class="person-avatar">FK</div>
+      <div><div class="person-name">Fathi Kallel</div><div class="person-role">General Chair</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">MB</div>
+      <div><div class="person-name">Mohamed Ben Slima</div><div class="person-role">General Chair</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+  </div>
+
+  <div class="role-section-title reveal">Program Chairs</div>
+  <div class="people-grid reveal">
+    <div class="person-card">
+      <div class="person-avatar">MG</div>
+      <div><div class="person-name">Mohamed Ghorbel</div><div class="person-role">Program Chair</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">LS</div>
+      <div><div class="person-name">Lamia Sellami</div><div class="person-role">Program Chair</div><div class="person-affil">ISBS</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">HS</div>
+      <div><div class="person-name">Hassene Seddik</div><div class="person-role">Program Chair</div><div class="person-affil">ENSIT</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">MS</div>
+      <div><div class="person-name">Mounir Sayadi</div><div class="person-role">Program Chair</div><div class="person-affil">ENSIT</div></div>
+    </div>
+  </div>
+
+  <div class="role-section-title reveal">Organizing Committee</div>
+  <div class="people-grid reveal">
+    <div class="person-card">
+      <div class="person-avatar">MS</div>
+      <div><div class="person-name">Mouna Sahnoun</div><div class="person-role">Committee Chair</div><div class="person-affil">ISSATG</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">TB</div>
+      <div><div class="person-name">Tayssir Boushila</div><div class="person-role">Organizing Committee</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">IB</div>
+      <div><div class="person-name">Ibtissem Boushila</div><div class="person-role">Organizing Committee</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">HB</div>
+      <div><div class="person-name">Hanenen Ben Abdelali</div><div class="person-role">Organizing Committee</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">OZ</div>
+      <div><div class="person-name">Omar Zribi</div><div class="person-role">Organizing Committee</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+    <div class="person-card">
+      <div class="person-avatar">YA</div>
+      <div><div class="person-name">Yasmine Abdelmalek</div><div class="person-role">Organizing Committee</div><div class="person-affil">ENET'COM</div></div>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<div class="divider"></div>
+
+
+<!-- REGISTRATION -->
+<div class="section-wrapper">
+<section id="registration">
+  <div class="section-label reveal">Join the school</div>
+  <h2 class="section-title reveal">Registration</h2>
+  <div class="reg-grid reveal">
+    <div class="reg-card featured">
+<h3>Registration Fee</h3>
+<div class="reg-fees-grid">
+  <div class="reg-fee-card">
+    <div class="reg-fee">350 €</div>
+    <div class="reg-fee-label">Students</div>
+  </div>
+  <div class="reg-fee-card">
+    <div class="reg-fee">500 €</div>
+    <div class="reg-fee-label">Others</div>
+  </div>
+</div>
+<div class="reg-fee-note">🏨 Accommodation at <strong>El Moradi Mahdia Hotel 5★</strong> included</div>
+<div class="reg-detail"><strong>Format:</strong> In-person, Mahdia, Tunisia</div>
+<div class="reg-detail"><strong>Duration:</strong> 4 days · 28 hours</div>
+<div class="reg-detail"><strong>Target:</strong> Graduate students, researchers, professionals</div>
+      
+      <div style="margin-top:2rem;">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfAL8r-HN4rnjGNSsHudknxY6EuqyJgFy7VShy0Pb7X69YbNA/viewform" target="_blank" class="btn-primary" style="display:inline-flex;">Register Now →</a>
+      </div>
+      <div class="qr-section">
+        <img src="https://quickchart.io/qr?text=https://docs.google.com/forms/d/e/1FAIpQLSfAL8r-HN4rnjGNSsHudknxY6EuqyJgFy7VShy0Pb7X69YbNA/viewform&size=180&margin=2&dark=0A7C7E" alt="QR registration">
+        <div class="qr-label"><strong>Scan to register</strong>Point your camera at the QR code to open the registration form directly on your device.</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="reg-card" style="margin-bottom:1.5rem;">
+        <h3>Bank Transfer Details</h3>
+        <div class="bank-block">
+          <h4>Payment Information</h4>
+          <div class="bank-row"><span class="bank-key">Account holder</span><span class="bank-val">Association des Technologies du Signal et de l'Image</span></div>
+          <div class="bank-row"><span class="bank-key">Bank</span><span class="bank-val">Tunisian Post</span></div>
+          <div class="bank-row"><span class="bank-key">Account number</span><span class="bank-val">1770 1000 0002 2241 0834</span></div>
+          <div class="bank-row"><span class="bank-key">IBAN</span><span class="bank-val">TN59 1770 1000 0002 2241 0834</span></div>
+          <div class="bank-row"><span class="bank-key">Swift code</span><span class="bank-val">LPTNTNTT</span></div>
+        </div>
+        <div style="margin-top:1.25rem; font-size:0.8rem; color:var(--ink-soft); line-height:1.7;">
+          After payment, send your bank transfer confirmation and completed registration form to <strong style="color:var(--teal);">summerschoolgai26@gmail.com</strong>
+        </div>
+      </div>
+
+      <div class="reg-card">
+        <h3>What's Included</h3>
+        <div style="display:flex; flex-direction:column; gap:0.6rem; margin-top:0.5rem;">
+          <div class="reg-detail">Accommodation</strong> at the <strong>⭐⭐⭐⭐⭐ El Moradi Mahdia Hotel</strong>.</div>
+          <div class="reg-detail">Access to all 4 days of lectures &amp; labs</div>
+          <div class="reg-detail">Hands-on PyTorch lab materials</div>
+          <div class="reg-detail">Certificate of attendance</div>
+          <div class="reg-detail">Access to all slides &amp; resources</div>
+          <div class="reg-detail">Coffee breaks &amp; networking sessions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="section-wrapper alt">
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label" style="justify-content:center;">Contact</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <p class="section-desc" style="margin:0 auto 0; text-align:center;">Have questions about the program, registration, or logistics? We're happy to help.</p>
+    <a href="mailto:summerschoolgai26@gmail.com" class="contact-email">
+      ✉ summerschoolgai26@gmail.com
+    </a>
+    <div class="contact-social">
+      <a href="https://github.com/summerschoolgai26" target="_blank" class="social-link">⚙ GitHub</a>
+    </div>
+  </div>
+</section>
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">SS·AI·Med 2026</div>
+  <div class="footer-links">
+    <a href="#about">About</a>
+    <a href="#program">Program</a>
+    <a href="#registration">Register</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="footer-right">Mahdia, Tunisia · July 1–4, 2026</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // Nav scroll shadow
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  // Mobile menu
+  function toggleMobile() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMobile() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+</script>
+
+</body>
+</html>
